@@ -1,0 +1,69 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+
+<dom-module id="app-navigator">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      #anchors, #territories {
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (min-width: 1200px) {}
+    </style>
+
+    <div id="anchors">
+      <template is="dom-repeat" items="{{anchors}}">
+        <div class="anchor" on-click="_dispatchNav" where-to$="{{item}}">{{item}}</div>
+      </template>
+    </div>
+
+    <div id="territories">
+      <div class="territory">
+        O
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class AppNavigator extends Polymer.Element {
+      static get is() { return 'app-navigator' }
+
+      static get properties() {
+        return {
+          anchors: {
+            type: Array,
+            value: [
+              'vision',
+              'strenght',
+              'tech',
+              'whoami'
+            ]
+          }
+        }
+      }
+
+      _dispatchNav(e) {
+        // Grab the anchor to reach
+        const anchor = e.target.getAttribute('where-to')
+        // Payload
+        const payload = {
+          detail: {
+            anchor
+          },
+          bubbles: true,
+          composed: true,
+        }
+        // Dispatch event with payload
+        window.dispatchEvent(new CustomEvent('nav-scroll', payload))
+      }
+    }
+
+    window.customElements.define(AppNavigator.is, AppNavigator)
+  </script>
+</dom-module>
