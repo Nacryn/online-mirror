@@ -1,8 +1,10 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
+<link rel="import" href="../components/card-project.html">
+
 <link rel="import" href="../styles/shared-styles.html">
 
-<dom-module id="app-section">
+<dom-module id="projects-section">
   <template>
     <style include="shared-styles">
       :host {
@@ -10,33 +12,31 @@
         width: 100%;
         background-color: #202124;
         padding-top: var(--gutter, 20px);
-        padding-bottom: var(--gutter, 20px);
+        padding-bottom: calc(var(--gutter, 20px) + 6px);
       }
 
       #content {
         display: block;
         margin-left: 120px;
         margin-right: 120px;
-      }
 
-      slot {
-        width: 100%;
-      }
-
-      @media (min-width: 1200px) {
-
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
       }
     </style>
 
     <div id="content">
-      <slot></slot>
+      <card-project></card-project>
+      <card-project></card-project>
+      <card-project></card-project>
     </div>
 
   </template>
 
   <script>
-    class AppSection extends Polymer.Element {
-      static get is() { return 'app-section' }
+    class ProjectsSection extends Polymer.Element {
+      static get is() { return 'projects-section' }
 
       static get properties() {
         return {
@@ -44,6 +44,6 @@
       }
     }
     
-    window.customElements.define(AppSection.is, AppSection)
+    window.customElements.define(ProjectsSection.is, ProjectsSection)
   </script>
 </dom-module>
