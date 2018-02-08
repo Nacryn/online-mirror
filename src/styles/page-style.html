@@ -1,0 +1,27 @@
+<dom-module id="page-style">
+  <template>
+    <style>
+      :host {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px 0px;
+        /* I have no idea where those last 20px are coming from... investigate later */
+        min-height: calc(100vh - calc(var(--logo-intermediate-height) + 10px) - var(--app-footer-height) - 40px);
+      }
+
+      @media (min-width: 620px) {
+        :host {
+          /* I have no idea where those last 20px are coming from... investigate later */
+          min-height: calc(100vh - calc(var(--logo-big-height) + 10px) - var(--app-footer-height) - 40px);
+        }
+      }
+
+      @media (min-width: 1200px) {
+        :host {
+          
+        }
+      }
+    </style>
+  </template>
+</dom-module>

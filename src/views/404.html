@@ -10,22 +10,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
-<dom-module id="my-view404">
-  <template>
-    <style>
-      :host {
-        display: block;
+<link rel="import" href="../styles/page-style.html">
+<link rel="import" href="../styles/shared-styles.html">
 
-        padding: 10px 20px;
-      }
+<dom-module id="not-until-we-are-lost-do-we-begin-to-understand-ourselves">
+  <template>
+    <style include="shared-styles page-style">
     </style>
 
-    Oops you hit a 404. <a href="[[rootPath]]">Head back to home.</a>
+    Not until we are lost do we begin to understand ourselves.
+    <br>
+
+    <a href="[[rootPath]]">Head back to home.</a>
+    
   </template>
 
   <script>
-    class MyView404 extends Polymer.Element {
-      static get is() { return 'my-view404'; }
+    class NotUntilWeAreLost extends Polymer.Element {
+      static get is() { return 'not-until-we-are-lost-do-we-begin-to-understand-ourselves'; }
       static get properties() {
         return {
           // This shouldn't be neccessary, but the Analyzer isn't picking up
@@ -35,6 +37,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     }
 
-    window.customElements.define(MyView404.is, MyView404);
+    window.customElements.define(NotUntilWeAreLost.is, NotUntilWeAreLost);
   </script>
 </dom-module>

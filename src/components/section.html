@@ -1,0 +1,44 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+
+<dom-module id="app-section">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        width: 100%;
+        background-color: #202124;
+        padding-top: var(--gutter, 20px);
+        padding-bottom: var(--gutter, 20px);
+      }
+
+      #content {
+        display: block;
+        margin-left: 120px;
+        margin-right: 120px;
+      }
+
+      @media (min-width: 1200px) {
+
+      }
+    </style>
+
+    <div id="content">
+      <slot></slot>
+    </div>
+  </template>
+
+  <script>
+    class AppSection extends Polymer.Element {
+      static get is() { return 'app-section' }
+
+      static get properties() {
+        return {
+        }
+      }
+    }
+    
+    window.customElements.define(AppSection.is, AppSection)
+  </script>
+</dom-module>

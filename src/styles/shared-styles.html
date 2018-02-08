@@ -1,0 +1,59 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<!-- shared styles for all views -->
+<dom-module id="shared-styles">
+  <template>
+    <style>
+      h1 {
+        margin: 16px 0;
+        color: #fff;
+        font-size: 22px;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--app-text-color);
+      }
+
+      a:hover {
+        color: var(--app-text-highlight);
+      }
+
+      a.no-style {
+        color: inherit;
+        pointer-events: auto;
+      }
+
+      a.no-style:hover {
+        color: inherit;
+      }
+      
+      paper-input {
+        --paper-input-container-color: var(--app-text-color);
+        --paper-input-container-focus-color: #fff;
+        --paper-input-container-input-color: #fff;
+      }
+
+      .primary-button {
+        background-color: var(--app-secondary-color);
+        color: var(--app-text-highlight);
+        margin: calc(var(--gutter) * 2) 0 10px 0;
+        width: 100%;
+      }
+
+      .primary-button.large {
+        max-width: 300px;
+      }
+    </style>
+  </template>
+</dom-module>

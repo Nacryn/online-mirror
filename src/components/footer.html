@@ -1,0 +1,46 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+
+<dom-module id="app-footer">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        width: 100%;
+        margin-top: calc(var(--gutter, 20px) * 2);
+        background-color: #202124;
+        color: #43b581;
+        padding-top: var(--gutter, 20px);
+        padding-bottom: var(--gutter, 20px);
+      }
+
+      #content {
+        max-width: var(--app-intermediate-width);
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: var(--gutter, 20px);
+        padding-right: var(--gutter, 20px);
+      }
+
+      @media (min-width: 1200px) {
+        #content {
+          max-width: var(--app-max-width);
+        }
+      }
+    </style>
+
+    <div id="content">
+      Made with madness by <a href="/theforge" class="no-style">the Forge</a>
+    </div>
+  </template>
+
+  <script>
+    class AppFooter extends Polymer.Element {
+      static get is() { return 'app-footer' }
+
+    }
+    
+    window.customElements.define(AppFooter.is, AppFooter)
+  </script>
+</dom-module>

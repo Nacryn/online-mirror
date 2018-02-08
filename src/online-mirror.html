@@ -20,21 +20,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="components/footer.html">
+<link rel="import" href="components/section.html">
+
+<link rel="lazy-import" href="views/landing.html">
+<link rel="lazy-import" href="views/sorcery.html">
+<link rel="lazy-import" href="views/contact.html">
+<link rel="lazy-import" href="views/404.html">
+
 <link rel="import" href="my-icons.html">
+<link rel="import" href="styles/app-style.html">
+<link rel="import" href="styles/shared-styles.html">
 
-<link rel="lazy-import" href="my-view1.html">
-<link rel="lazy-import" href="my-view2.html">
-<link rel="lazy-import" href="my-view3.html">
-<link rel="lazy-import" href="my-view404.html">
-
-<dom-module id="my-app">
+<dom-module id="online-mirror">
   <template>
-    <style>
+    <style include="app-style shared-styles">
       :host {
-        --app-primary-color: #4285f4;
-        --app-secondary-color: black;
+        /* App colors */
+        --app-primary-color: #18191c;
+        --app-secondary-color: #43b581;
+        --app-background-color: #18191c;
+        --app-text-color: hsla(0, 0%, 100%, .6);
+        --app-text-highlight: #fff;
+        --app-unselected-color: #b5bbbe;
+        --app-selected-color: #70b6e9;
+        /* Font weight */
+        --app-fw-highlight: 500;
+        --app-fw-body: 400;
+        /* Others */
+        --gutter: 20px;
+        --app-intermediate-width: 960px;
+        --app-max-width: 1170px;
+        --app-footer-height: 84px;
 
         display: block;
+        color: var(--app-text-color);
+        font-weight: var(--app-fw-body);
       }
 
       app-drawer-layout:not([narrow]) [drawer-toggle] {
@@ -68,6 +90,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
+    <iron-media-query query="max-width: 640px" query-matches="{{narrow}}"></iron-media-query>
+
+    <firebase-app
+        project-id="looking-for-date"
+        auth-domain="looking-for-date.firebaseapp.com"
+        database-url="https://looking-for-date.firebaseio.com"
+        api-key="AIzaSyD87oEezorCEgYk8GxnH97f69VRqZ5FQGc"
+        storage-bucket=""
+        messaging-sender-id="617991117837">
+    </firebase-app>
+
     <app-location
         route="{{route}}"
         url-space-regex="^[[rootPath]]">
@@ -80,24 +113,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tail="{{subroute}}">
     </app-route>
 
-    <app-drawer-layout fullbleed narrow="{{narrow}}">
+    <app-drawer-layout fullbleed force-narrow>
       <!-- Drawer content -->
-      <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
+      <app-drawer id="drawer" slot="drawer" align="end" swipe-open="[[narrow]]">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="[[rootPath]]view1">View One</a>
-          <a name="view2" href="[[rootPath]]view2">View Two</a>
-          <a name="view3" href="[[rootPath]]view3">View Three</a>
+          <a name="landing" href="[[rootPath]]landing">Landing</a>
+          <a name="sorcery" href="[[rootPath]]sorcery">Sorcery</a>
+          <a name="contact" href="[[rootPath]]contact">Contact</a>
+
+          <template is="dom-if" if="[[isConnected]]">
+            <a name="profile" href="[[rootPath]]hq">Headquarters</a>
+            <br>
+            <a href="#" on-click="_signOut">Disconnect</a>
+          </template>
+          
+          <template is="dom-if" if="[[!isConnected]]">
+            <br>
+            <a href="/knot">Connect</a>
+          </template>
         </iron-selector>
       </app-drawer>
 
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
 
-        <app-header slot="header" condenses reveals effects="waterfall">
-          <app-toolbar>
+        <app-header id="appheader" slot="header" condenses reveals effects="waterfall">
+          <app-toolbar id="header-toolbar">
+            <div main-title><a class="no-style" href="/">ONLINE MIRROR</a></div>
+            <template is="dom-if" if="[[isConnected]]">
+              <a href="#"><paper-icon-button on-click="_signOut" icon="toll"></paper-icon-button></a>
+              <a href="/hq"><paper-icon-button icon="bug-report"></paper-icon-button></a>
+            </template>
+            
+            <template is="dom-if" if="[[!isConnected]]">
+              <a href="/knot"><paper-icon-button icon="fingerprint" ></paper-icon-button></a>
+            </template>
+
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
           </app-toolbar>
         </app-header>
 
@@ -106,18 +159,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
-          <my-view404 name="view404"></my-view404>
+          <landing-view name="landing"></landing-view>
+          <sorcery-view name="sorcery"></sorcery-view>
+          <contact-view name="contact"></contact-view>
+          <not-until-we-are-lost-do-we-begin-to-understand-ourselves name="404"></not-until-we-are-lost-do-we-begin-to-understand-ourselves>
         </iron-pages>
+
+        <app-footer></app-footer>
       </app-header-layout>
     </app-drawer-layout>
   </template>
 
   <script>
-    class MyApp extends Polymer.Element {
-      static get is() { return 'my-app'; }
+    class OnlineMirror extends Polymer.Element {
+      static get is() { return 'online-mirror'; }
 
       static get properties() {
         return {
@@ -143,7 +198,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'view1' in that case.
-        this.page = page || 'view1';
+        this.page = page || 'landing';
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
@@ -153,7 +208,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+        var resolvedPageUrl = this.resolveUrl('views/' + page + '.html');
         Polymer.importHref(
             resolvedPageUrl,
             null,
@@ -162,10 +217,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _showPage404() {
-        this.page = 'view404';
+        this.page = '404';
       }
     }
 
-    window.customElements.define(MyApp.is, MyApp);
+    window.customElements.define(OnlineMirror.is, OnlineMirror);
   </script>
 </dom-module>

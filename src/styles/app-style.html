@@ -1,0 +1,84 @@
+
+<dom-module id="app-style">
+  <template>
+    <style>
+      :host {
+        --logo-intermediate-height: 72px;
+        --logo-big-height: 90px;
+        --logo-intermediate-width: 259px;
+        --logo-big-width: 324px; 
+      }
+
+      app-drawer-layout:not([narrow]) [drawer-toggle] {
+        display: none;
+      }
+
+      app-header {
+        background-color: var(--app-background-color);
+        color: var(--app-primary-color);
+      }
+
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: var(--app-primary-color);
+      }
+
+      .drawer-list {
+        margin: 0 20px;
+      }
+
+      .drawer-list a {
+        display: block;
+        padding: 0 16px;
+        text-decoration: none;
+        color: var(--app-text-color);
+        line-height: 40px;
+      }
+
+      .drawer-list a.iron-selected {
+        color: var(--app-secondary-color);
+        font-weight: bold;
+      }
+
+      #header-toolbar {
+        max-width: var(--app-intermediate-width);
+        height: calc(var(--logo-intermediate-height) + 10px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      div[main-title] {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: var(--logo-intermediate-height);
+        color: var(--app-secondary-color);
+      }
+
+      div[main-title] iron-icon {
+        height: var(--logo-intermediate-height);
+        width: var(--logo-intermediate-width);
+      }
+
+      @media (min-width: 1200px) {
+        #header-toolbar {
+          max-width: var(--app-max-width);
+        }
+      }
+      
+      @media (min-width: 620px) {
+        #header-toolbar {
+          height: calc(var(--logo-big-height) + 10px);
+        }
+
+        div[main-title] {
+          height: var(--logo-big-height);
+        }
+
+        div[main-title] iron-icon {
+          height: var(--logo-big-height);
+          width: var(--logo-big-width);
+        }
+      }
+    </style>
+  </template>
+</dom-module>
