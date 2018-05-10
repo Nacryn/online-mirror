@@ -1,17 +1,11 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../components/section.html">
-<link rel="import" href="../components/navigator.html">
+<link rel="import" href="../components/sections/splash.html">
+<link rel="import" href="../components/sections/vision.html">
+<link rel="import" href="../components/sections/strenghts.html">
+<link rel="import" href="../components/sections/tech.html">
+<link rel="import" href="../components/sections/whoami.html">
 
 <link rel="import" href="../mixins/scroll.html">
 
@@ -21,79 +15,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="landing-view">
   <template>
     <style include="shared-styles page-style">
-
-      app-navigator {
-        position: fixed;
-        top: 30%;
-        left: 40px;
+      #splash {
+        margin-top: 0;
+        padding-top: 0;
       }
     </style>
 
-    <app-navigator></app-navigator>
-
-    <app-section id="title">
-      <h1>MAD MAGE STUDIO</h1>
-      <p>Sorcier du web indépendant</p>
-    </app-section>
-
-    <app-section id="vision">
-      <h1>Vision</h1>
-      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus doloribus eius similique dolore aperiam deserunt veniam iste porro, nulla ullam repellat fugit quasi consequatur debitis sit ex quas quisquam eveniet.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, id! Esse quos quaerat rem quod non eligendi voluptate. Iure nam voluptatibus, autem suscipit corporis deleniti voluptates. Rerum vitae impedit eaque.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus dolores soluta, doloremque ipsam ut quos repellat quas quisquam. Veritatis nesciunt unde ducimus. Exercitationem ratione, nam aliquam quae est rerum quas.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur obcaecati quo velit explicabo error consequatur id praesentium ipsa dolore hic veritatis repellat totam, ipsam molestiae tempore cum vel. Commodi, at.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit eligendi natus dolorem optio facilis labore fuga omnis nihil quos, sit quasi ipsum harum, eveniet maiores consequatur! Corporis quam rem nesciunt.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis eum quisquam officia quas non, modi totam repellendus ducimus atque nemo culpa harum, possimus optio dolorem incidunt corrupti dignissimos veniam ad?
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat porro nihil recusandae unde voluptatum et ad debitis beatae maxime, fuga alias magnam saepe blanditiis architecto, reiciendis, vero officiis molestiae sequi!
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, facere nesciunt? Doloremque ad consectetur alias praesentium deleniti iure officiis iste, illum veniam sunt quis error saepe cum temporibus quaerat laudantium?
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat optio facere praesentium consectetur eius dicta porro ex sed. Tempora quidem natus suscipit, possimus voluptates temporibus nihil fugiat sunt molestias non!
-      </p>
-    </app-section>
-
-    <app-section id="strenght">
-      <h1>Points forts</h1>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis veniam, voluptatum adipisci sequi necessitatibus nam molestias? Deleniti laboriosam at, reprehenderit iusto expedita ea necessitatibus nihil reiciendis numquam perferendis vitae totam?
-      </p>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio veritatis obcaecati nam quasi. Consectetur earum beatae ab sapiente dicta. Error sint velit quod? Provident, magnam natus modi fugiat nemo aspernatur.
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum ex natus laudantium quae aperiam quos, accusamus pariatur quod! Maiores minus aut vel? Ipsa deserunt voluptatibus suscipit soluta temporibus, vero cupiditate?
-      </p>
-    </app-section>
-
-    <app-section id="tech">
-      <h1>Technologies</h1>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis veniam, voluptatum adipisci sequi necessitatibus nam molestias? Deleniti laboriosam at, reprehenderit iusto expedita ea necessitatibus nihil reiciendis numquam perferendis vitae totam?
-      </p>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio veritatis obcaecati nam quasi. Consectetur earum beatae ab sapiente dicta. Error sint velit quod? Provident, magnam natus modi fugiat nemo aspernatur.
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum ex natus laudantium quae aperiam quos, accusamus pariatur quod! Maiores minus aut vel? Ipsa deserunt voluptatibus suscipit soluta temporibus, vero cupiditate?
-      </p>
-    </app-section>
-
-    <app-section id="whoami">
-      <h1>Comment ça marche</h1>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis veniam, voluptatum adipisci sequi necessitatibus nam molestias? Deleniti laboriosam at, reprehenderit iusto expedita ea necessitatibus nihil reiciendis numquam perferendis vitae totam?
-      </p>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio veritatis obcaecati nam quasi. Consectetur earum beatae ab sapiente dicta. Error sint velit quod? Provident, magnam natus modi fugiat nemo aspernatur.
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum ex natus laudantium quae aperiam quos, accusamus pariatur quod! Maiores minus aut vel? Ipsa deserunt voluptatibus suscipit soluta temporibus, vero cupiditate?
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit consequuntur culpa saepe rem quaerat officiis nisi eaque, sapiente laborum molestiae est, quae qui explicabo, labore numquam accusamus asperiores alias cum!
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus facilis incidunt eum minima blanditiis esse praesentium aut culpa commodi sapiente repellendus excepturi architecto, voluptatum, distinctio beatae est cum nam a?
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam iusto harum, consequuntur eaque rerum assumenda illum praesentium amet fuga, dignissimos quod dolorum voluptatum quos mollitia doloribus odio pariatur laboriosam quia?
-      </p>
-    </app-section>
+    <splash-section id="splash"></splash-section>
+    <vision-section id="vision"></vision-section>
+    <strenghts-section id="strenght"></strenghts-section>
+    <tech-section id="tech"></tech-section>
+    <whoami-section id="whoami"></whoami-section>
 
   </template>
 

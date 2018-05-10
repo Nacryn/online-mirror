@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
+<link rel="import" href="../mixins/navigation.html">
+
 <link rel="import" href="../styles/page-style.html">
 <link rel="import" href="../styles/shared-styles.html">
 
@@ -13,20 +15,53 @@
 
         box-shadow: 4px 6px 8px #000000;
 
-        width: 200px;
-        height: 200px;
-
         padding: 20px;
       }
     </style>
 
     <h2>Hay</h2>
+    Card for [[slug]] project.
+    <br>
+    Click to navigate
     
   </template>
 
   <script>
-    class CardProject extends Polymer.Element {
+    class CardProject extends NavigationMixin(Polymer.Element) {
       static get is() { return 'card-project'; }
+
+      static get properties() {
+        return {
+          slug: {
+            type: String,
+            value: null
+          },
+          project: {
+            type: Object,
+            value: null
+          }
+        }
+      } 
+
+      constructor() {
+        super()
+        this._scrollListener = this._openProject.bind(this)
+      }
+
+      connectedCallback() {
+        super.connectedCallback()
+        this.addEventListener('click', this._scrollListener)
+      }
+
+      disconnectedCallback() {
+        super.disconnectedCallback()
+        this.removeEventListener('click', this._scrollListener)
+      }
+
+      _openProject(e) {
+        console.log('going to new project')
+        this.goTo(`project/${this.slug}`)
+      }
     }
 
     window.customElements.define(CardProject.is, CardProject);

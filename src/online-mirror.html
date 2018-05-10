@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymerfire/polymerfire.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
@@ -21,8 +22,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 
+<link rel="import" href="components/navigator.html">
 <link rel="import" href="components/footer.html">
 <link rel="import" href="components/section.html">
+
+<link rel="import" href="mixins/redux.html">
 
 <link rel="lazy-import" href="views/landing.html">
 <link rel="lazy-import" href="views/sorcery.html">
@@ -39,7 +43,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         /* App colors */
         --app-primary-color: #18191c;
-        --app-secondary-color: #43b581;
+        --app-secondary-color: greenyellow;
+        /* --app-secondary-color: #43b581; */
         --app-background-color: #18191c;
         --app-text-color: hsla(0, 0%, 100%, .6);
         --app-text-highlight: #fff;
@@ -59,46 +64,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-weight: var(--app-fw-body);
       }
 
-      app-drawer-layout:not([narrow]) [drawer-toggle] {
-        display: none;
-      }
-
-      app-header {
-        color: #fff;
-        background-color: var(--app-primary-color);
-      }
-
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
-      }
-
-      .drawer-list {
-        margin: 0 20px;
-      }
-
-      .drawer-list a {
-        display: block;
-        padding: 0 16px;
-        text-decoration: none;
-        color: var(--app-secondary-color);
-        line-height: 40px;
-      }
-
-      .drawer-list a.iron-selected {
-        color: black;
-        font-weight: bold;
+      app-navigator {
+        position: fixed;
+        top: 30%;
+        left: 30px;
+        z-index: 2;
       }
     </style>
 
     <iron-media-query query="max-width: 640px" query-matches="{{narrow}}"></iron-media-query>
 
     <firebase-app
-        project-id="looking-for-date"
-        auth-domain="looking-for-date.firebaseapp.com"
-        database-url="https://looking-for-date.firebaseio.com"
-        api-key="AIzaSyD87oEezorCEgYk8GxnH97f69VRqZ5FQGc"
-        storage-bucket=""
-        messaging-sender-id="617991117837">
+        project-id="online-mirror"
+        auth-domain="online-mirror.firebaseapp.com"
+        database-url="https://online-mirror.firebaseio.com"
+        api-key="AIzaSyAmmD0sDFzKRtI4NkcbISSoUZjD9RjUucQ"
+        storage-bucket="online-mirror.appspot.com"
+        messaging-sender-id="866406753468">
     </firebase-app>
 
     <app-location
@@ -112,6 +94,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         data="{{routeData}}"
         tail="{{subroute}}">
     </app-route>
+
+    <app-navigator id="navigator" root-path="[[rootPath]]" page="[[page]]"></app-navigator>
 
     <app-drawer-layout fullbleed force-narrow>
       <!-- Drawer content -->
@@ -136,10 +120,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </app-drawer>
 
       <!-- Main content -->
-      <app-header-layout has-scrolling-region>
-
-        <app-header id="appheader" slot="header" condenses reveals effects="waterfall">
-          <app-toolbar id="header-toolbar">
+      <app-header-layout>
+        <app-header id="appheader" slot="header" condenses fixed effects="fadeBackground parallax-background resize-title">
+          <app-toolbar id="full-toolbar">
             <div main-title><a class="no-style" href="/">ONLINE MIRROR</a></div>
             <template is="dom-if" if="[[isConnected]]">
               <a href="#"><paper-icon-button on-click="_signOut" icon="toll"></paper-icon-button></a>
@@ -157,21 +140,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <iron-pages
             selected="[[page]]"
             attr-for-selected="name"
+            selected-attribute="selected"
             fallback-selection="view404"
             role="main">
           <landing-view name="landing"></landing-view>
           <sorcery-view name="sorcery"></sorcery-view>
+          <project-view name="project" subroute="[[subroute]]"></project-view>
           <contact-view name="contact"></contact-view>
           <not-until-we-are-lost-do-we-begin-to-understand-ourselves name="404"></not-until-we-are-lost-do-we-begin-to-understand-ourselves>
         </iron-pages>
 
-        <app-footer></app-footer>
+        <app-footer id="appfooter"></app-footer>
       </app-header-layout>
     </app-drawer-layout>
   </template>
 
   <script>
-    class OnlineMirror extends Polymer.Element {
+    class OnlineMirror extends ReduxMixin(Polymer.Element) {
       static get is() { return 'online-mirror'; }
 
       static get properties() {
@@ -186,6 +171,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // This shouldn't be neccessary, but the Analyzer isn't picking up
           // Polymer.Element#rootPath
           rootPath: String,
+          visible_header: {
+            type: Boolean,
+            statePath: 'layout.header.visible',
+            observer: '_toggleHeader'
+          },
+          visible_footer: {
+            type: Boolean,
+            statePath: 'layout.footer.visible',
+            observer: '_toggleFooter'
+          },
+          visible_navigator: {
+            type: Boolean,
+            statePath: 'layout.navigator.visible',
+            observer: '_toggleNavigator'
+          }
         };
       }
 
@@ -218,6 +218,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _showPage404() {
         this.page = '404';
+      }
+
+      _toggleHeader(newVal) {
+        this.$.appheader.style.display = (newVal) ? 'block' : 'none'
+      }
+
+      _toggleNavigator(newVal) {
+        this.$.navigator.style.display = (newVal) ? 'block' : 'none'
+      }
+
+      _toggleFooter(newVal) {
+        this.$.appfooter.style.display = (newVal) ? 'block' : 'none'
       }
     }
 

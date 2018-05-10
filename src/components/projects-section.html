@@ -2,34 +2,39 @@
 
 <link rel="import" href="../components/card-project.html">
 
+<link rel="import" href="../styles/section-style.html">
 <link rel="import" href="../styles/shared-styles.html">
 
 <dom-module id="projects-section">
   <template>
-    <style include="shared-styles">
-      :host {
-        display: block;
-        width: 100%;
-        background-color: #202124;
-        padding-top: var(--gutter, 20px);
-        padding-bottom: calc(var(--gutter, 20px) + 6px);
-      }
-
+    <style include="shared-styles section-style">
       #content {
-        display: block;
-        margin-left: 120px;
-        margin-right: 120px;
-
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        flex-wrap: wrap;
       }
+
+      card-project {
+        width: 200px;
+        height: 200px;
+
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
     </style>
 
-    <div id="content">
-      <card-project></card-project>
-      <card-project></card-project>
-      <card-project></card-project>
+    <div id="wrapper">
+      <div id="title"></div>
+      <div id="content">
+        <card-project slug="onward"></card-project>
+        <card-project slug="wohlolooo"></card-project>
+        <card-project slug="idiocratic"></card-project>
+        <card-project slug="jedisrien"></card-project>
+        <card-project slug="monstruous"></card-project>
+        <card-project slug="useless"></card-project>
+      </div>
     </div>
 
   </template>

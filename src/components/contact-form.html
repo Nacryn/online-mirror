@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+
+<dom-module id="contact-form">
+  <template>
+    <style include="shared-styles">
+
+    </style>
+
+    <paper-input always-float-label label="Nom"></paper-input>
+    <paper-input always-float-label label="Email"></paper-input>
+    <paper-input always-float-label label="Message"></paper-input>
+    
+    <paper-button>Envoyer</paper-button>
+  </template>
+
+  <script>
+    class ContactForm extends Polymer.Element {
+      static get is() { return 'contact-form'; }
+
+      static get properties() {
+        return {
+          
+        }
+      }
+    }
+
+    window.customElements.define(ContactForm.is, ContactForm);
+  </script>
+</dom-module>

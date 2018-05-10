@@ -1,0 +1,55 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../styles/shared-styles.html">
+<link rel="import" href="../../styles/section-style.html">
+
+<dom-module id="whoami-section">
+  <template>
+    <style include="shared-styles section-style">
+      #content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    </style>
+
+    <div id="wrapper">
+      <div id="title">Comment ça fonctionne</div>
+      <div id="content">
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis veniam, voluptatum adipisci sequi necessitatibus nam molestias?
+          Deleniti laboriosam at, reprehenderit iusto expedita ea necessitatibus nihil reiciendis numquam perferendis vitae
+          totam?
+        </p>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio veritatis obcaecati nam quasi. Consectetur earum beatae ab
+          sapiente dicta. Error sint velit quod? Provident, magnam natus modi fugiat nemo aspernatur. Lorem ipsum dolor sit
+          amet consectetur, adipisicing elit. Earum ex natus laudantium quae aperiam quos, accusamus pariatur quod! Maiores
+          minus aut vel? Ipsa deserunt voluptatibus suscipit soluta temporibus, vero cupiditate?
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit consequuntur culpa saepe rem quaerat officiis nisi eaque,
+          sapiente laborum molestiae est, quae qui explicabo, labore numquam accusamus asperiores alias cum! Lorem ipsum
+          dolor sit amet consectetur, adipisicing elit. Possimus facilis incidunt eum minima blanditiis esse praesentium
+          aut culpa commodi sapiente repellendus excepturi architecto, voluptatum, distinctio beatae est cum nam a? Lorem
+          ipsum dolor sit amet, consectetur adipisicing elit. Magnam iusto harum, consequuntur eaque rerum assumenda illum
+          praesentium amet fuga, dignissimos quod dolorum voluptatum quos mollitia doloribus odio pariatur laboriosam quia?
+        </p>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    class WhoamISection extends Polymer.Element {
+      static get is() { return 'whoami-section' }
+
+      static get properties() {
+        return {
+        }
+      }
+    }
+
+    window.customElements.define(WhoamISection.is, WhoamISection)
+  </script>
+</dom-module>

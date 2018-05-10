@@ -1,0 +1,97 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../styles/shared-styles.html">
+<link rel="import" href="../../styles/section-style.html">
+
+<dom-module id="strenghts-section">
+  <template>
+    <style include="shared-styles section-style">
+      #content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .strenght_elem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: calc(var(--app-gutter, 20px) * 2);
+      }
+
+      .symbol {
+        display: inline-block;
+        background-color: azure;
+        width: 64px;
+        height: 64px;
+      }
+
+      .description {
+        display: inline-block;
+        width: var(--one-col-width);
+        margin-top: var(--app-gutter, 20px);
+      }
+    </style>
+
+    <div id="wrapper">
+      <div id="title">Points forts</div>
+      <div id="content">
+        <div class="strenght_elem">
+          <div class="symbol"></div>
+          <div class="description">
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis veniam, voluptatum adipisci sequi necessitatibus nam molestias?
+              Deleniti laboriosam at, reprehenderit iusto expedita ea necessitatibus nihil reiciendis numquam perferendis
+              vitae totam?
+            </p>
+          </div>
+        </div>
+
+        <div class="strenght_elem">
+          <div class="symbol"></div>
+          <div class="description">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio veritatis obcaecati nam quasi. Consectetur earum beatae ab
+              sapiente dicta. Error sint velit quod? Provident, magnam natus modi fugiat nemo aspernatur.
+            </p>
+          </div>
+        </div>
+
+        <div class="strenght_elem">
+          <div class="symbol"></div>
+          <div class="description">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio veritatis obcaecati nam quasi. Consectetur earum beatae ab
+              sapiente dicta. Error sint velit quod? Provident, magnam natus modi fugiat nemo aspernatur.
+            </p>
+          </div>
+        </div>
+
+        <div class="strenght_elem">
+          <div class="symbol"></div>
+          <div class="description">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio veritatis obcaecati nam quasi. Consectetur earum beatae ab
+              sapiente dicta. Error sint velit quod? Provident, magnam natus modi fugiat nemo aspernatur.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    class StrenghtsSection extends Polymer.Element {
+      static get is() { return 'strenghts-section' }
+
+      static get properties() {
+        return {
+        }
+      }
+    }
+
+    window.customElements.define(StrenghtsSection.is, StrenghtsSection)
+  </script>
+</dom-module>

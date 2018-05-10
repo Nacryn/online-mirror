@@ -1,0 +1,93 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
+
+<link rel="import" href="../mixins/page.html">
+<link rel="import" href="../mixins/actions/layout.html">
+
+<link rel="import" href="../styles/page-style.html">
+<link rel="import" href="../styles/shared-styles.html">
+
+<dom-module id="project-view">
+  <template>
+    <style include="shared-styles page-style">
+      :host {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 3;
+        height: 100vh;
+        width: 100vw;
+        background-color: grey;
+
+        padding: 30px 40px;
+        box-sizing: border-box;
+      }
+
+      #leave {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        width: 78px;
+        height: 78px;
+      }
+
+      #title {
+        font-size: 48px;
+        color: var(--app-secondary-color);
+      }
+    </style>
+
+    <firebase-document
+      path="/projects/{{slug}}"
+      data="{{project}}">
+    </firebase-document>
+
+    <div id="title">Projet [[project.title]]</div>
+
+    <paper-icon-button id="leave" icon="close" on-click="_toProjects"></paper-icon-button>
+
+  </template>
+
+  <script>
+    class ProjectView extends LayoutActions(PageMixin(Polymer.Element)) {
+      static get is() { return 'project-view'; }
+
+      static get properties() {
+        return {
+          subroute: {
+            type: String,
+            value: null
+          },
+          slug: {
+            type: String
+          },
+          project: {
+            type: Object
+          }
+        }
+      }
+
+      _selected() {
+        this.dispatch('toggleAllNav', false)
+        this.slug = this.subroute.path.substr(1)
+
+        console.log('Project slug : ', this.slug)
+      }
+
+      _unselected() {
+        this.dispatch('toggleFooter', true)
+        this.dispatch('toggleNavigator', true)
+      }
+
+      _toProjects() {
+        this.goTo('sorcery')
+      }
+    }
+
+    window.customElements.define(ProjectView.is, ProjectView);
+  </script>
+</dom-module>
+
+

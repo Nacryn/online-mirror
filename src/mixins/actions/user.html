@@ -1,0 +1,32 @@
+<link rel="import" href="../redux.html">
+
+<script>
+  const UserActions = parent => class extends ReduxMixin(parent) {
+    static get actions() {
+      return {
+
+        updateName(name) {
+          return {
+            type: 'UPDATE_USER_NAME',
+            name
+          }
+        },
+
+        connectUser(name, email) {
+          return {
+            type: 'CONNECT_USER',
+            name,
+            email
+          }
+        },
+
+        disconnectUser() {
+          return {
+            type: 'DISCONNECT_USER'
+          }
+        }
+        
+      }
+    }
+  }
+</script>

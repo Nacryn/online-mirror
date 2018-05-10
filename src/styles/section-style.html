@@ -1,0 +1,30 @@
+<dom-module id="section-style">
+  <template>
+    <style>
+      :host {
+        --one-col-width: 425px;
+
+        display: block;
+        width: 100%;
+        margin-top: var(--app-gutter, 20px);
+        padding-top: var(--gutter, 20px);
+        padding-bottom: var(--gutter, 20px);
+      }
+
+      #wrapper {
+        display: block;
+        margin-left: 120px;
+        margin-right: 120px;
+      }
+
+      #title {
+        color: var(--app-secondary-color);
+        text-transform: uppercase;
+      }
+
+      #content {
+        width: 100%;
+      }
+    </style>
+  </template>
+</dom-module>

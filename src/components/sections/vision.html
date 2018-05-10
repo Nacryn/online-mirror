@@ -1,0 +1,71 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../styles/shared-styles.html">
+<link rel="import" href="../../styles/section-style.html">
+
+<dom-module id="vision-section">
+  <template>
+    <style include="shared-styles section-style">
+      #content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      #intro {
+        width: var(--one-col-width);
+      }
+
+      #quote {
+        width: var(--one-col-width);
+      }
+
+      #vision {
+        width: 100%;
+      }
+    </style>
+
+    <div id="wrapper">
+      <div id="title">Vision</div>
+      <div id="content">
+        <div id="intro">
+          <p>Ut labores minimum atomorum pro. Laudem tibique ut has.
+            <br> Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet,
+            per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
+          </p>
+        </div>
+
+        <div id="quote">
+          <div id="line">Une technologie suffisament avancée peut être prise pour de la magie.</div>
+          <div id="author">Arthur C. Clarke</div>
+        </div>
+
+        <div id="vision">
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus doloribus eius similique dolore aperiam deserunt veniam iste
+            porro, nulla ullam repellat fugit quasi consequatur debitis sit ex quas quisquam eveniet. Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Aliquid, id! Esse quos quaerat rem quod non eligendi voluptate. Iure nam voluptatibus,
+            autem suscipit corporis deleniti voluptates. Rerum vitae impedit eaque. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Repellendus dolores soluta, doloremque ipsam ut quos repellat quas quisquam. Veritatis nesciunt
+            unde ducimus. Exercitationem ratione, nam aliquam quae est rerum quas.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    class VisionSection extends Polymer.Element {
+      static get is() { return 'vision-section' }
+
+      static get properties() {
+        return {
+        }
+      }
+    }
+
+    window.customElements.define(VisionSection.is, VisionSection)
+  </script>
+</dom-module>
