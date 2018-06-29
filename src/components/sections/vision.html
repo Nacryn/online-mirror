@@ -6,19 +6,15 @@
 <dom-module id="vision-section">
   <template>
     <style include="shared-styles section-style">
+      :host {
+        padding-top: 0;
+      }
+
       #content {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         flex-wrap: wrap;
-      }
-
-      #intro {
-        width: var(--one-col-width);
-      }
-
-      #quote {
-        width: var(--one-col-width);
       }
 
       #vision {
@@ -27,30 +23,27 @@
     </style>
 
     <div id="wrapper">
-      <div id="title">Vision</div>
       <div id="content">
         <div id="intro">
-          <p>Ut labores minimum atomorum pro. Laudem tibique ut has.
-            <br> Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet,
-            per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.
+          <p>
+            On rêve tous d'un monde ou la technologie nous soutiens, sans se mettre en travers de notre route. 
+            Un monde avec des outils simples, qui nous aident à progresser vers nos objectifs.
+            <br> C'est pour réaliser cet idéal que je persévère en tant que développeur. Pourquoi construire des application ?
+            Pour offrir l'opportunité à ceux qui en ont besoin de s'appuyer sur la technologie pour atteindre leur propres rêves.
           </p>
-        </div>
-
-        <div id="quote">
-          <div id="line">Une technologie suffisament avancée peut être prise pour de la magie.</div>
-          <div id="author">Arthur C. Clarke</div>
         </div>
 
         <div id="vision">
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus doloribus eius similique dolore aperiam deserunt veniam iste
-            porro, nulla ullam repellat fugit quasi consequatur debitis sit ex quas quisquam eveniet. Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Aliquid, id! Esse quos quaerat rem quod non eligendi voluptate. Iure nam voluptatibus,
-            autem suscipit corporis deleniti voluptates. Rerum vitae impedit eaque. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Repellendus dolores soluta, doloremque ipsam ut quos repellat quas quisquam. Veritatis nesciunt
-            unde ducimus. Exercitationem ratione, nam aliquam quae est rerum quas.
+            Le Lorem ipsum, c'est cool ! Go on ! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus doloribus eius similique dolore aperiam deserunt veniam iste
+            porro, nulla ullam repellat fugit quasi consequatur debitis sit ex quas quisquam eveniet. 
           </p>
         </div>
+
+        <div id="quote">
+            <div id="line">Une technologie suffisament avancée peut être prise pour de la magie.</div>
+            <div id="author">Arthur C. Clarke</div>
+          </div>
       </div>
     </div>
 

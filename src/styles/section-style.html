@@ -6,20 +6,20 @@
 
         display: block;
         width: 100%;
-        margin-top: var(--app-gutter, 20px);
         padding-top: var(--gutter, 20px);
         padding-bottom: var(--gutter, 20px);
       }
 
       #wrapper {
         display: block;
-        margin-left: 120px;
-        margin-right: 120px;
+        margin-left: var(--gutter, 20px);
+        margin-right: var(--gutter, 20px);
       }
 
       #title {
-        color: var(--app-secondary-color);
+        color: var(--app-section-title-color, var(--app-text-highlight));
         text-transform: uppercase;
+        font-weight: 600;
       }
 
       #content {

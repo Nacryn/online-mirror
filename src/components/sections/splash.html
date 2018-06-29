@@ -20,26 +20,30 @@
         flex-direction: column;
         position: absolute;
         top: 65vh;
-        left: 120px;
+        left: var(--gutter, 20px);
       }
 
       #title {
-        text-transform: uppercase;
-        color: var(--app-secondary-color);
-        font-size: 46px;
+        color: var(--app-text-highlight);
+        font-size: 60px;
+        line-height: 60px;
         font-weight: 600;
+        text-transform: uppercase;
       }
 
       #subtitle {
-        font-size: 26px;
+        font-size: 40px;
         font-weight: 300;
-        color: var(--app-text-highlight);
+        line-height: 40px;
+        color: var(--app-text-color);
+
+        margin-top: 10px;
       } 
     </style>
 
     <div id="wrapper">
       <div id="cover">
-        <div id="title">Tech Forge Studio</div>
+        <div id="title">Mikaël</div>
         <div id="subtitle">Sorcier du web indépendant</div>
       </div>
     </div>

@@ -1,0 +1,48 @@
+<dom-module id="drawer-style">
+  <template>
+    <style>
+      #drawer {
+        color: black;
+      }
+
+      #drawer-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+      }
+
+      #drawer #links {
+        flex-grow: 1;
+      }
+
+      .drawer-list {
+        margin: 0 20px;
+      }
+
+      .drawer-list a {
+        display: block;
+        padding: 0 20px;
+        text-decoration: none;
+        color: black;
+        text-transform: uppercase;
+        font-size: 24px;
+        line-height: 50px;
+      }
+
+      .drawer-list a.iron-selected {
+        color: var(--app-primary-color);
+        font-weight: bold;
+      }
+
+      #drawer app-logo {
+        margin: var(--gutter) auto;
+      }
+
+      #drawer #drawer-close {
+        width: 50px;
+        height: 50px;
+      }
+    </style>
+  </template>
+</dom-module>

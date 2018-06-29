@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
 <link rel="import" href="../mixins/navigation.html">
 
@@ -10,19 +11,43 @@
     <style include="shared-styles">
       :host {
         display: inline-block;
-
-        background-color: grey;
-
+        background-color: #c8c8c8;
         box-shadow: 4px 6px 8px #000000;
-
         padding: 20px;
+
+        color: #333333;
+      }
+
+      #title {
+        font-weight: 200;
+        font-size: 28px;
+        color: black;
+        text-transform: uppercase;
+      }
+
+      paper-button {
+        width: 100%;
+        background-color: #333333;
+        color: #fff;
+      }
+
+      #content {
+        margin-top: var(--gutter);
+        margin-bottom: var(--gutter);
       }
     </style>
 
-    <h2>Hay</h2>
-    Card for [[slug]] project.
-    <br>
-    Click to navigate
+    <div id="title">[[slug]]</div>
+
+    <div id="content">
+      Card for [[slug]] project.
+      <br>
+      Ici il y a la présentation du stuff and so on. Puis on valide et on appuie sur un bouton pour en voir plus.
+      <br><br>
+      On est content et tout ça tout ça. Juste un POINT FORT, et puis quelques détails significatifs.
+    </div>
+    
+    <paper-button id="see" on-tap="_openProject">Voir</paper-button>
     
   </template>
 
@@ -45,7 +70,6 @@
 
       constructor() {
         super()
-        this._scrollListener = this._openProject.bind(this)
       }
 
       connectedCallback() {

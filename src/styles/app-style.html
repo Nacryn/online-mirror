@@ -9,34 +9,16 @@
         --logo-big-width: 324px; 
       }
 
-      app-drawer-layout:not([narrow]) [drawer-toggle] {
-        display: none;
-      }
-
       app-header {
-        display: none;
-        color: var(--app-primary-color);
+        color: var(--app-text-highligh);
       }
 
       app-header paper-icon-button {
-        --paper-icon-button-ink-color: var(--app-primary-color);
+        --paper-icon-button-ink-color: var(--app-icon-color);
       }
 
-      .drawer-list {
-        margin: 0 20px;
-      }
-
-      .drawer-list a {
-        display: block;
-        padding: 0 16px;
-        text-decoration: none;
-        color: var(--app-text-color);
-        line-height: 40px;
-      }
-
-      .drawer-list a.iron-selected {
-        color: var(--app-secondary-color);
-        font-weight: bold;
+      #full-toolbar {
+        background-color: #202124;
       }
 
       #header-toolbar {

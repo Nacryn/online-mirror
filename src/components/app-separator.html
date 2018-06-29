@@ -1,0 +1,27 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="app-separator">
+  <template>
+    <style>
+      :host {
+        display: block;
+        height: 2px;
+        background-color: black;
+
+        margin-left: var(--gutter);
+        margin-right: var(--gutter);
+      }
+    </style>
+
+    <div id="separator"></div>
+  </template>
+
+  <script>
+    class AppSeparator extends Polymer.Element {
+      static get is() { return 'app-separator' }
+
+    }
+    
+    window.customElements.define(AppSeparator.is, AppSeparator)
+  </script>
+</dom-module>
