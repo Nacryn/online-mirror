@@ -3,6 +3,10 @@ import { html } from '@polymer/lit-element';
 import { afterNextRender } from '@polymer/polymer/lib/utils/render-status';
 import { PageViewElement } from '../page-view-element.js';
 import '@polymer/paper-dialog'
+import '@polymer/paper-button'
+import '@polymer/iron-image'
+import '@polymer/iron-icons/iron-icons'
+import '@polymer/paper-icon-button'
 // Custom elements
 import '../section'
 import '../carousel'
@@ -26,7 +30,7 @@ store.addReducers({
 });
 
 class ProjectPage extends connect(store)(PageViewElement) {
-  _render({ _project }) {
+  _render({ _project, _selectedIllu }) {
     if (!_project) return
 
     return html`
@@ -76,6 +80,7 @@ class ProjectPage extends connect(store)(PageViewElement) {
         .wrapper-thumbnails {
           display: flex;
           flex-direction: row;
+          flex-wrap: wrap;
         }
 
         .thumbnail {
@@ -100,8 +105,8 @@ class ProjectPage extends connect(store)(PageViewElement) {
       </style>
 
       <app-section>
-        <div class="go-back"><a href="explore" class="no-style">Retourner à la liste</a></div>
         <div class="page-title">${_project.title}</div>
+        <div class="go-back"><a href="explore" class="no-style">Retourner à la liste</a></div>
       </app-section>
 
       <app-section id="pres">
@@ -125,9 +130,21 @@ class ProjectPage extends connect(store)(PageViewElement) {
       <app-section id="thumbnails">
         <div slot="title">Illustrations</div>
         <div class="wrapper-thumbnails">
-          <div class="thumbnail" on-click="${() => store.dispatch(openModal("illustrations", {illustration: "thumb1"}))}"></div>
-          <div class="thumbnail" on-click="${() => store.dispatch(openModal("illustrations", {illustration: "thumb2"}))}"></div>
-          <div class="thumbnail" on-click="${() => store.dispatch(openModal("illustrations", {illustration: "thumb3"}))}"></div>
+          ${Object.keys(_project.illustrations).map((key) => {
+            const item = _project.illustrations[key];
+            return html`
+            <div class="thumbnail" on-click="${() => store.dispatch(openModal("illustrations", {illustration: item.id}))}">
+              <iron-image
+                style="width:220px; height:100px;"
+                placeholder="${item.base64}"
+                sizing="cover"
+                preload src$="${item.src}"
+                alt="${item.name}"
+                fade>
+              </iron-image>
+            </div>
+            `
+          })}
         </div>
       </app-section>
 
@@ -144,13 +161,23 @@ class ProjectPage extends connect(store)(PageViewElement) {
       </app-section>
 
       <paper-dialog id="illustrations" class="dial" with-backdrop>
-        <h2>Header</h2>
-        <paper-dialog-scrollable>
-          Lorem ipsum...
-        </paper-dialog-scrollable>
-        <div class="buttons">
-          <paper-button dialog-dismiss>Cancel</paper-button>
-          <paper-button dialog-confirm autofocus>Accept</paper-button>
+        <paper-icon-button class="dismiss-button" icon="close" dialog-dismiss></paper-icon-button>
+        <iron-image
+          style="width:100%; height:100%;"
+          placeholder="${_selectedIllu.base64}"
+          sizing="cover"
+          preload src$="${_selectedIllu.src}"
+          alt="${_selectedIllu.name}"
+          fade>
+        </iron-image>
+        <div class="action-bar">
+          <div class="details">
+            Un personnage magicien
+          </div>
+          <div class="actions">
+            <paper-button on-click="${ () => this._changeIllustration("prev") }">Précédente</paper-button>
+            <paper-button on-click="${ () => this._changeIllustration("next") }">Suivante</paper-button>
+          </div>
         </div>
       </paper-dialog>
     `
@@ -159,20 +186,24 @@ class ProjectPage extends connect(store)(PageViewElement) {
   static get properties() {
     return {
       _modal: Object,
-      _project: Object
+      _project: Object,
+      _selectedIllu: Object
     }
   }
 
   constructor() {
     super()
+    this._selectedIllu = {}
     afterNextRender(this, () => {
       this.addEventListener('iron-overlay-closed', this._closeModal)
     })
   }
 
+  // Add a check in any form to know if it's already open ?
   _didRender( { _modal }) {
     if (_modal && _modal.title == "illustrations") {
       console.log('open with : ', _modal.payload.illustration);
+      this._updateSelected(_modal.payload.illustration)
       this.shadowRoot.querySelector('#illustrations').open()
     }
   }
@@ -186,6 +217,35 @@ class ProjectPage extends connect(store)(PageViewElement) {
     // #TODO : Use a selector
     this._project = state.project.project
     this._modal = state.modal
+  }
+
+  // SIMPLIFY THIS ?
+  // Use a state selected illustration index already ?
+  // Add it to "_stateChanged" ?
+  _updateSelected(id) {
+    let index = this._project.illustrations.findIndex( (element, index, array) => {
+      if (element.id == id)
+        return true
+    });
+
+    if (index >= 0) {
+      this._selectedIllu = this._project.illustrations[index]
+      this._selectedIndex = index
+    }
+  }
+
+  // Computation for next or prev, can it be simplified ?
+  // Use another dispatch than open modal, maybe just an update on the selected illustration index ?
+  _changeIllustration(direction) {
+    const lastPos = this._project.illustrations.length - 1
+    let newIdx = (direction === "prev") ? this._selectedIndex - 1 : this._selectedIndex + 1
+    if (newIdx > lastPos)
+      newIdx = 0
+    else if (newIdx < 0)
+      newIdx = lastPos
+
+    console.log("new idx : ", newIdx);
+    store.dispatch(openModal("illustrations", {illustration: this._project.illustrations[newIdx].id}))
   }
 }
 

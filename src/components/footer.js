@@ -10,7 +10,7 @@ class AppFooter extends LitElement {
       :host {
         display: block;
         width: 100%;
-        background-color: #202124;
+        background-color: var(--app-header-background-color, #202124);
         color: var(--app-text-highlight);
         padding-top: var(--gutter, 20px);
         padding-bottom: var(--gutter, 20px);
